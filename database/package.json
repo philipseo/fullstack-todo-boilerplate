@@ -1,0 +1,71 @@
+{
+  "name": "database",
+  "version": "0.0.1",
+  "description": "database using knex & postgresql",
+  "license": "MIT",
+  "keywords": [
+    "knex",
+    "postgresql",
+    "typescript"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "scripts": {
+    "copy:local": "cp .env.local .env",
+    "copy:development": "cp .env.development .env",
+    "copy:staging": "cp .env.staging .env",
+    "copy:production": "cp .env.production .env",
+    "migrate:make:local": "yarn copy:local && knex migrate:make -x ts",
+    "migrate:make:development": "yarn copy:development && knex migrate:make -x ts",
+    "migrate:make:staging": "yarn copy:staging && knex migrate:make -x ts",
+    "migrate:make:production": "yarn copy:production && knex migrate:make -x ts",
+    "migrate:latest:local": "yarn copy:local && knex migrate:latest",
+    "migrate:latest:staging": "yarn copy:development && knex migrate:latest",
+    "migrate:latest:development": "yarn copy:staging && knex migrate:latest",
+    "migrate:latest:production": "yarn copy:production && knex migrate:latest",
+    "migrate:rollback:local": "yarn copy:local && knex migrate:rollback",
+    "migrate:rollback:development": "yarn copy:development && knex migrate:rollback",
+    "migrate:rollback:staging": "yarn copy:staging && knex migrate:rollback",
+    "migrate:rollback:production": "yarn copy:production && knex migrate:rollback",
+    "seed:make:local": "yarn copy:local && knex seed:make -x ts",
+    "seed:make:staging": "yarn copy:development && knex seed:make -x ts",
+    "seed:make:development": "yarn copy:staging && knex seed:make -x ts",
+    "seed:make:production": "yarn copy:production && knex seed:make -x ts",
+    "seed:run:local": "yarn copy:local && knex seed:run",
+    "seed:run:staging": "yarn copy:development && knex seed:run",
+    "seed:run:development": "yarn copy:staging && knex seed:run",
+    "seed:run:production": "yarn copy:production && knex seed:run",
+    "lint": "eslint --ext .js,.ts",
+    "lint:fix": "yarn lint -- --fix",
+    "prettier": "prettier --ignore-path .prettierignore --write \"**/*.+(js|json|ts)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.17",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/node": "^14.14.22",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}

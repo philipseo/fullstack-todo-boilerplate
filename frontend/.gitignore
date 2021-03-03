@@ -1,0 +1,17 @@
+# IDE
+.idea
+.vscode
+
+# Mac OS
+.DS_Store
+lib/.DS_Store
+src/.DS_Store
+
+# package directories
+node_modules
+dist
+package-lock.json
+yarn.lock
+
+# .gitkeep
+!/**/.gitkeep

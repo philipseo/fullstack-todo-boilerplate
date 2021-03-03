@@ -1,0 +1,6 @@
+package.json
+tsconfig.json
+.eslintrc.json
+
+dist
+node_modules
