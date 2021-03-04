@@ -8,7 +8,7 @@ import TaskList from '@components/templates/TaskList';
 
 const TodoList: FunctionComponent = () => {
 
-  const { loading: fetchLoading, error: fetchError, data, refetch } = useQuery(FETCH_TASKS, {
+  const { loading, error, data, refetch } = useQuery(FETCH_TASKS, {
     variables: {
       condition: {
         deletedAt: null,
@@ -18,12 +18,15 @@ const TodoList: FunctionComponent = () => {
 
   return (
     <>
-      {fetchLoading && <Loader />}
-      {fetchError && <ErrorReload message={fetchError?.message} />}
-      <TaskList
-        data={data?.allTasks?.nodes || []}
-        refetch={() => refetch()}
-      />
+      {loading && <Loader />}
+      {error && <ErrorReload message={error?.message} />}
+      {
+        !loading && !error && data &&
+        <TaskList
+          data={data?.allTasks?.nodes || []}
+          refetch={() => refetch()}
+        />
+      }
     </>
   );
 }
